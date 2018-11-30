@@ -53,40 +53,40 @@ var quotes = [
 // I didn't want to randomize the background color because it can sometimes lead to hard to read quotes
 var colors = [
     {
-        background: "#ff2e63", //pink
-        button: "#252a34"
+        background: "#FE02EF", //pink
+        button: "#7D0275"
     },
     {
-        background: "#00adb5", //teal
-        button: "#393e46"
+        background: "#03FBE5", //teal
+        button: "#027D72"
     },
     {
-        background: "#f38181", //salmon
-        button: "#625772"
+        background: "#FB0325", //red
+        button: "#730312"
     },
     {
-        background: "#6639a6", //purple
-        button: "#521262"
+        background: "#9003FE", //purple
+        button: "#420373"
     },
     {
-        background: "#3f72af", //blue
-        button: "#112d4e"
+        background: "#0329FE", //blue
+        button: "#011480"
     },
     {
-        background: "#f95959", //orange
-        button: "#455d7a"
+        background: "#FB5604", //orange
+        button: "#802B01"
     },
     {
-        background: "#a3de83", //lt green
-        button: "#2eb872"
+        background: "#44FB04", //lt green
+        button: "#217A02"
     },
     {
-        background: "#118df0", //bright blue
-        button: "#0e2f56"
+        background: "#03F4FC", //bright blue
+        button: "#02767A"
     },
     {
-        background: "#ff5722", //bright orange
-        button: "#393e46"
+        background: "#FCA103", //bright orange
+        button: "#BB7802"
     },
     {
         background: "#3fc1c9", //aqua
