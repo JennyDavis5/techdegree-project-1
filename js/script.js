@@ -3,53 +3,162 @@ Treehouse Techdegree:
 FSJS project 1 - A Random Quote Generator
 ******************************************/
 
-// Study guide for this project - https://drive.google.com/file/d/1s5grutGuQFwJcQP8bFwEI69Q8FCkGdDk/view?usp=sharing
+var html = '';
+var timer;
+
+// Array to hold quotes, sources, citations, years
+var quotes = [
+  {
+    quote: "The only thing we have to fear is fear itself.",
+    source: "Franklin D. Roosevelt",
+    citation: "First Inaugural Address",
+    year: 1933,
+    tags: ["Hope", "Politics"]
+  },
+  {
+    quote: "In a word, I would not take any risk of being entangled upon the river, like an ox jumped half over a fence, and liable to be torn by dogs, front and rear, without a fair chance to gore one way or kick the other.",
+    source: "Abraham Lincoln",
+    citation: "Letter to Joseph Hooker",
+    year: 1863,
+    tags: ["Risk", "Danger"]
+  },
+  {
+    quote: "Don\'t walk in front of me... I may not follow. Don\'t walk behind me... I may not lead. Walk beside me... just be my friend",
+    source: "Albert Camus",
+    tags: ["Friends", "Friendship"]
+  },
+  {
+    quote: "No one can make you feel inferior without your consent.",
+    source: "Eleanor Roosevelt",
+    tags: ["Confidence", "Inspirational", "Wisdom"]
+  },
+  {
+    quote: "If you tell the truth, you don't have to remember anything.",
+    source: "Mark Twain",
+    tags: ["Lies", "Memory", "Truth"]
+  },
+  {
+    quote: "We accept the love we think we deserve.",
+    source: "Stephen Chbosky",
+    tags: ["Inspirational", "Love"]
+  },
+  {
+    quote: "Don't cry because it's over, smile because it happened.",
+    source: "Dr. Seuss",
+    tags: ["Crying", "Happiness", "Smiling", "Sadness"]
+  }
+];
+
+// creates an array of objects to store background and button color information
+// I didn't want to randomize the background color because it can sometimes lead to hard to read quotes
+var colors = [
+    {
+        background: "#ff2e63", //pink
+        button: "#252a34"
+    },
+    {
+        background: "#00adb5", //teal
+        button: "#393e46"
+    },
+    {
+        background: "#f38181", //salmon
+        button: "#625772"
+    },
+    {
+        background: "#6639a6", //purple
+        button: "#521262"
+    },
+    {
+        background: "#3f72af", //blue
+        button: "#112d4e"
+    },
+    {
+        background: "#f95959", //orange
+        button: "#455d7a"
+    },
+    {
+        background: "#a3de83", //lt green
+        button: "#2eb872"
+    },
+    {
+        background: "#118df0", //bright blue
+        button: "#0e2f56"
+    },
+    {
+        background: "#ff5722", //bright orange
+        button: "#393e46"
+    },
+    {
+        background: "#3fc1c9", //aqua
+        button: "#fc5185"
+    }
+];
+
+// Function to get a random object from quotes array and store in variable randomQuote
+function getRandomQuote() {
+  // Random number generator
+  var randomQuote = Math.floor(Math.random() * quotes.length);
+
+  return quotes[randomQuote];
+}
+
+// Function to generate random rgb color value
+function getRandomColor() {
+  var randomColor = Math.floor(Math.random() * colors.length);
+
+  return colors[randomColor];
+}
+
+// assigns a setInterval method to the variable so that the printQuote function will automatically run after 10 seconds
+function startTimer() {
+  timer = setInterval(printQuote, 20000);
+}
+
+// clears the setInterval method from the timer variable
+function clearTimer() {
+  clearInterval(timer);
+}
 
 
-/*** 
-  Create the array of quote objects and name it `quotes`.
-  Add at least five quote objects to the `quotes` array.
-  Give each quote object a `quote` and `source` property.
+function printQuote() {
+  // creates the currentQuoute variable and sets the value to the random object that is returned when the getRandomQuote function is called
+    // creates the currentColor variable and sets the value to the random object that is returned when the getRandomColor function is called
+    // creates the html variable and uses the currentQuote variable along with key values to build a string
+  var currentQuote = getRandomQuote();
+  var currentColor = getRandomColor();
+  html = '<p class = "quote">' + currentQuote.quote + '</p>';
+  html += '<p class = "source">' + currentQuote.source;
+  if (currentQuote.citation) {
+    html += '<span class = "citation">' + currentQuote.citation + '</span>';
+  } else {
+    html += '';
+  }
+  if (currentQuote.year) {
+    html += '<span class = "year">' + currentQuote.year + '</span></p>';
+  } else {
+    html += '';
+  }
+  if (currentQuote.tags) {
+    html += '<h3>' + currentQuote.tags.join(', ') + '</h3>';
+  } else {
+    html += '';
+  }
 
-  Recommended: 
-    - Add at least one `year` and/or `citation` property to at least one 
-      quote object.
-***/
+  // writes the info from the html variable to the div with the quote-box id
+  // uses the currentColor variable to change the background color
+  // uses the currentColor variable to change the button color
+  document.getElementById("quote-box").innerHTML = html;
+  document.body.style.background = currentColor.background;
+  document.getElementById("loadQuote").style.background = currentColor.button;
 
+  // clears any previous timers that might be running and starts a new one
+  clearTimer();
+  startTimer();
+}
 
+// runs the printQuote function upon initial page load
+printQuote();
 
-
-/***
-  Create the `getRandomQuote` function to:
-   - generate a random number 
-   - use the random number to `return` a random quote object from the 
-     `quotes` array.
-***/
-
-
-
-
-/***
-  Create the `printQuote` function to: 
-   - call the `getRandomQuote` function and assign it to a variable.
-   - use the properties of the quote object stored in the variable to 
-     create your HTML string.
-   - use conditionals to make sure the optional properties exist before 
-     they are added to the HTML string.
-   - set the `innerHTML` of the `quote-box` div to the HTML string. 
-***/
-
-
-
-
-/***
-  When the "Show another quote" button is clicked, the event listener 
-  below will be triggered, and it will call, or "invoke", the `printQuote` 
-  function. So do not make any changes to the line of code below this 
-  comment.
-***/
-
+// event listener to respong to "Show another quote" button clicks
+//when user clicks anywhere on the button, the "printQuote" function is called
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
-
-
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
